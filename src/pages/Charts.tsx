@@ -1,4 +1,4 @@
-import { ComposedChart, Bar, Line, XAxis, YAxis, Tooltip, Legend, CartesianGrid, ResponsiveContainer } from "recharts";
+import { ComposedChart, Bar, Line, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import { useMemo, useState } from "react";
 import useRowData from "../hooks/useRowData";
 
@@ -23,29 +23,35 @@ const Charts = () => {
   }, [rowData, selectedStore]);
 
   const chartData: ChartData[] = useMemo(() => {
-    const dataMap: Record<string, ChartData> = {};
+    const dataMap: Record<string, { week: string; totalGMDollars: number; totalSalesDollars: number }> = {};
   
     filteredRowData.forEach((row) => {
-      Object.keys(row)?.forEach((key) => {
-        if (key.startsWith("gmDollars_") || key.startsWith("gmPercent_")) {
+      Object.keys(row).forEach((key) => {
+        if (key.startsWith("gmDollars_") || key.startsWith("salesDollars_")) {
           const week = key.split("_")[1];
   
           if (!dataMap[week]) {
-            dataMap[week] = { week, gmDollars: 0, gmPercent: 0 };
+            dataMap[week] = { week, totalGMDollars: 0, totalSalesDollars: 0 };
           }
   
           if (key.startsWith("gmDollars_")) {
-            dataMap[week].gmDollars = parseFloat(row[key].replace("$", "")) || 0;
+            dataMap[week].totalGMDollars += parseFloat(row[key].replace("$", "")) || 0;
           }
-          if (key.startsWith("gmPercent_")) {
-            dataMap[week].gmPercent = parseFloat(row[key].replace("%", "")) || 0;
+          if (key.startsWith("salesDollars_")) {
+            dataMap[week].totalSalesDollars += parseFloat(row[key].replace("$", "")) || 0;
           }
         }
       });
     });
   
-    return Object.values(dataMap);
+    // Convert to chartData format
+    return Object.values(dataMap).map(({ week, totalGMDollars, totalSalesDollars }) => ({
+      week,
+      gmDollars: totalGMDollars,
+      gmPercent: totalSalesDollars > 0 ? (totalGMDollars / totalSalesDollars) * 100 : 0,
+    }));
   }, [filteredRowData]);
+  
   
 
 
@@ -63,9 +69,8 @@ const Charts = () => {
     </select>
   </div>
 
-  <ResponsiveContainer width="100%" height={400}>
+  <ResponsiveContainer width="80%" style={{  padding: "5px",  background: "radial-gradient(circle, #595959 1%, #222 80%)",  border: "2px solid black"}} height={500}>
       <ComposedChart data={chartData}>
-        <CartesianGrid  />
         <XAxis dataKey="week" />
         <YAxis yAxisId="left" label={{ value: "GM Dollars ($)", angle: -90, position: "insideLeft" }} />
         <YAxis yAxisId="right" orientation="right" label={{ value: "GM %", angle: -90, position: "insideRight" }} />
