@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 import logo from "../assets/Gsynergy.svg"
 import user from "../assets/user.svg"
 import arrow from "../assets/arrow.svg"
-import { useContext, useState } from "react";
+import { useState } from "react";
 const Navbar = () => {
     // const { isAuthenticated, signOut } = useContext(AuthContext);
     const [isOpen, setIsOpen] = useState<boolean>(false);
