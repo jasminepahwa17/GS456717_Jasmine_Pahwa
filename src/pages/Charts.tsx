@@ -44,7 +44,6 @@ const Charts = () => {
       });
     });
   
-    // Convert to chartData format
     return Object.values(dataMap).map(({ week, totalGMDollars, totalSalesDollars }) => ({
       week,
       gmDollars: totalGMDollars,
