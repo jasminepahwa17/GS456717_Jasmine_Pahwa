@@ -12,11 +12,11 @@ interface CSVState {
     name: "storesCsv",
     initialState,
     reducers: {
-      setCSVData: (state, action: PayloadAction<any[]>) => {
+      setCSVStoreData: (state, action: PayloadAction<any[]>) => {
         state.data = action.payload;
       },
     },
   });
   
-  export const { setCSVData } = storesCSV.actions;
+  export const { setCSVStoreData } = storesCSV.actions;
   export default storesCSV.reducer;

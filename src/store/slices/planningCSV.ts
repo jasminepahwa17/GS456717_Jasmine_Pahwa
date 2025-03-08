@@ -8,15 +8,15 @@ interface CSVState {
     data: [],
   };
 
-  const skuCSV = createSlice({
-    name: "skuCSV",
+  const planningCSV = createSlice({
+    name: "planningCSV",
     initialState,
     reducers: {
-      setCSVSKUData: (state, action: PayloadAction<any[]>) => {
+        setCSVPlanningData: (state, action: PayloadAction<any[]>) => {
         state.data = action.payload;
       },
     },
   });
   
-  export const { setCSVSKUData } = skuCSV.actions;
-  export default skuCSV.reducer;
+  export const { setCSVPlanningData } = planningCSV.actions;
+  export default planningCSV.reducer;

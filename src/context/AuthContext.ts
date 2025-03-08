@@ -1,6 +1,5 @@
 import { createContext, useContext, useState, ReactNode } from "react";
 
-// Define types for authentication state
 interface User {
   id: string;
   name: string;

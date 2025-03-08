@@ -13,7 +13,7 @@ const routes = createBrowserRouter([
         element: <MainLayout />,
         errorElement: <ErrorPage />,
         children: [
-            { index: true, element: <Navigate to="/planning" replace /> },
+            { index: true, element: <Navigate to="/store" replace /> },
             { path: "store", element: <Store /> },
             { path: "sku", element: <SKU /> },
             { path: "planning", element: <Planning /> },

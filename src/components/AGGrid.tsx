@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from "react";
 import { AgGridReact, } from "ag-grid-react";
-import { AllCommunityModule, ModuleRegistry,ColDef, NumberEditorModule, TextEditorModule, ClientSideRowModelModule, ValidationModule } from "ag-grid-community";
+import { AllCommunityModule, ModuleRegistry, ColDef, NumberEditorModule, TextEditorModule, ClientSideRowModelModule, ValidationModule, RowClassParams } from "ag-grid-community";
 
 
 interface AGGridProps {
@@ -14,6 +14,9 @@ ModuleRegistry.registerModules([AllCommunityModule, NumberEditorModule,
     ClientSideRowModelModule,
     ValidationModule]);
 
+
+
+
 const AGGrid: React.FC<AGGridProps> = ({ data, rowData, setRowData, colDefs, }) => {
     useEffect(() => {
         if (data && data.length > 0) {
@@ -22,30 +25,41 @@ const AGGrid: React.FC<AGGridProps> = ({ data, rowData, setRowData, colDefs, }) 
     }, []);
 
     const gridOptions = {
-        rowDragManaged: true, 
-        rowDragEntireRow: true, 
+        rowDragManaged: true,
+        rowDragEntireRow: true,
         animateRows: true,
+        getRowStyle: (params: RowClassParams) => {
+            const rowId = parseInt(params.node.id ?? "0", 10); // Convert ID to a number safely
+            return {
+              backgroundColor: rowId % 2 === 0 ? "#ffffff" : "#f8f9fa", // Alternating colors
+            };
+          }
+
     };
+
 
     const defaultColDef = useMemo<ColDef>(() => {
         return {
-          editable: true,
-          flex: 1, 
-          minWidth: 100,
-          resizable: true,
+            editable: true,
+            flex: 1,
+            minWidth: 100,
+            resizable: true,
+            headerStyle: { color: 'gray', justifyContent: "center" },
+
         };
-      }, []);
-
-    console.log(rowData);
-    
-
-
+    }, []);
 
     return (<div className="ag-theme-quartz h-[calc(100%-6%)]" style={{ width: "100%" }}>
         {data.length !== 0 &&
             <AgGridReact rowData={rowData} columnDefs={colDefs}
                 gridOptions={gridOptions}
-                defaultColDef={defaultColDef} />
+               
+                rowBuffer={10} 
+                pagination={true} 
+                paginationPageSize={50} 
+                defaultColDef={defaultColDef}
+                
+                />
         }
     </div>);
 }

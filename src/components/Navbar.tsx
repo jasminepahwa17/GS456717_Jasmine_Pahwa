@@ -20,7 +20,6 @@ const Navbar = () => {
                     <img src={arrow} className="w-6" />
                 </div>
             </div>
-                  {/* Dropdown Menu */}
         {isOpen && (
           <div
             className="absolute right-2 top-22 w-40 bg-white shadow-lg rounded-md overflow-hidden"
