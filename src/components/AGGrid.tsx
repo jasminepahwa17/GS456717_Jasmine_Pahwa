@@ -17,7 +17,7 @@ ModuleRegistry.registerModules([AllCommunityModule, NumberEditorModule,
 
 
 
-const AGGrid: React.FC<AGGridProps> = ({ data, rowData, setRowData, colDefs, }) => {
+const AGGrid: React.FC<AGGridProps> = ({ data, rowData, setRowData, colDefs }) => {
     useEffect(() => {
         if (data && data.length > 0) {
             setRowData(data);
@@ -29,9 +29,9 @@ const AGGrid: React.FC<AGGridProps> = ({ data, rowData, setRowData, colDefs, }) 
         rowDragEntireRow: true,
         animateRows: true,
         getRowStyle: (params: RowClassParams) => {
-            const rowId = parseInt(params.node.id ?? "0", 10); // Convert ID to a number safely
+            const rowId = parseInt(params.node.id ?? "0", 10); 
             return {
-              backgroundColor: rowId % 2 === 0 ? "#ffffff" : "#f8f9fa", // Alternating colors
+              backgroundColor: rowId % 2 === 0 ? "#ffffff" : "#f8f9fa", 
             };
           }
 
@@ -48,17 +48,17 @@ const AGGrid: React.FC<AGGridProps> = ({ data, rowData, setRowData, colDefs, }) 
 
         };
     }, []);
+    
 
     return (<div className="ag-theme-quartz h-[calc(100%-6%)]" style={{ width: "100%" }}>
         {data.length !== 0 &&
             <AgGridReact rowData={rowData} columnDefs={colDefs}
                 gridOptions={gridOptions}
-               
+                rowDragManaged={true} 
                 rowBuffer={10} 
                 pagination={true} 
                 paginationPageSize={50} 
                 defaultColDef={defaultColDef}
-                
                 />
         }
     </div>);

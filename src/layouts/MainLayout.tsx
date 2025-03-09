@@ -11,6 +11,7 @@ const MainLayout = () => {
           <Sidebar />
           <main className="p-4 bg-gray-200 overflow-y-auto flex-1">
           <Outlet />
+          
         </main>
         </div>
       </div>

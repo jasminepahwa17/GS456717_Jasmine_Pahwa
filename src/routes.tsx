@@ -6,6 +6,7 @@ import SKU from "./pages/SKU"
 import Planning from "./pages/Planning";
 import Charts from "./pages/Charts";
 import Login from "./pages/Login";
+import Protection from "./utils/Protection";
 
 const routes = createBrowserRouter([
     {
@@ -14,10 +15,10 @@ const routes = createBrowserRouter([
         errorElement: <ErrorPage />,
         children: [
             { index: true, element: <Navigate to="/store" replace /> },
-            { path: "store", element: <Store /> },
-            { path: "sku", element: <SKU /> },
-            { path: "planning", element: <Planning /> },
-            { path: "charts", element: <Charts /> }
+            { path: "store", element: <Protection><Store /></Protection> },
+            { path: "sku", element: <Protection><SKU /></Protection> },
+            { path: "planning", element: <Protection><Planning /></Protection> },
+            { path: "charts", element: <Protection><Charts /></Protection> }
         ]
     },
     { path: "login", element: <Login /> }

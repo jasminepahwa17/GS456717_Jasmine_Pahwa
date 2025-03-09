@@ -3,9 +3,12 @@ import logo from "../assets/Gsynergy.svg"
 import user from "../assets/user.svg"
 import arrow from "../assets/arrow.svg"
 import { useState } from "react";
+import { useAuth } from "../context/AuthContext";
 const Navbar = () => {
-    // const { isAuthenticated, signOut } = useContext(AuthContext);
     const [isOpen, setIsOpen] = useState<boolean>(false);
+    const { logout, isAuthenticated } = useAuth();
+    console.log(isAuthenticated);
+    
 
     return (
         <div className=" bg-white h-20 z-50 shadow p-2 flex items-center justify-between">
@@ -26,16 +29,27 @@ const Navbar = () => {
             role="menu"
           >
             <ul className="text-gray-700">
+            {isAuthenticated ?
               <li>
+                <Link
+                  to="/login"
+                  onClick={logout}
+                  className="block px-4 py-2 hover:bg-gray-100"
+                  role="menuitem"
+                >
+                  Logout
+                </Link>
+              </li> : 
+                <li>
                 <Link
                   to="/login"
                   className="block px-4 py-2 hover:bg-gray-100"
                   role="menuitem"
                 >
+                  
                   Login
                 </Link>
-              </li>
-  
+              </li> }
             </ul>
           </div>
         )}

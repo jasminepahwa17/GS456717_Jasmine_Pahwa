@@ -28,8 +28,7 @@ const useRowData = () => {
         return map;
       }, [planningData]);
     
-    
-    
+
     
       const rowsData: RowData[] = useMemo(() => {
         return storeData.flatMap((store) =>

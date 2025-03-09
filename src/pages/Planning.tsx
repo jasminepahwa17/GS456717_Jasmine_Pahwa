@@ -13,7 +13,7 @@ type RowData = {
   skuLabel: string;
   price: number;
   cost: number;
-  [key: string]: string | number; 
+  [key: string]: string | number;
 };
 
 
@@ -34,62 +34,61 @@ const Planning = () => {
         acc[monthLabel] = {
           headerName: monthLabel,
           headerStyle: { color: 'gray' },
+          editable: false,
           children: [],
         };
-
       }
-
       acc[monthLabel].children.push({
         headerName: week.Week,
         headerStyle: { color: 'gray' },
-
-        
-
         children: [
           {
             field: `salesUnits_${week.Week}`,
             headerName: "Sales Units",
             editable: true,
-            flex: 1, 
+            flex: 1,
             minWidth: 150,
-            cellStyle: { textAlign: "right"},
+            cellStyle: { textAlign: "right" },
 
           },
           {
             field: `salesDollars_${week.Week}`,
             headerName: "Sales Dollars",
             flex: 1,
+            editable: false,
             minWidth: 150,
-            cellStyle: { textAlign: "right"},
+            cellStyle: { textAlign: "right" },
           },
           {
             field: `gmDollars_${week.Week}`,
             headerName: "GM Dollars",
             flex: 1,
+            editable: false,
             minWidth: 150,
-            cellStyle: { textAlign: "right"},
+            cellStyle: { textAlign: "right" },
           },
           {
             field: `gmPercent_${week.Week}`,
             headerName: "GM Percent",
             flex: 1,
+            editable: false,
             minWidth: 150,
             cellStyle: (params: CellClassParams) => {
               const value = (params.value as number) ?? 0;
-          
+
               let backgroundColor = "white";
               if (value >= 0.4) backgroundColor = "#7ac27a";
               else if (value >= 0.1) backgroundColor = "#ffde6b";
               else if (value > 0.05) backgroundColor = "#ffa366";
               else backgroundColor = "#ff6666";
-          
+
               return {
                 textAlign: "right",
                 backgroundColor,
               };
             },
-            valueFormatter: (params: ValueFormatterParams) => 
-              `${((params.value as number) * 100).toFixed(2)}%`, 
+            valueFormatter: (params: ValueFormatterParams) =>
+              `${((params.value as number) * 100).toFixed(2)}%`,
           }
         ],
       });
@@ -105,11 +104,9 @@ const Planning = () => {
   ];
 
 
-
-
   return (
     <div className="h-full">
-      <AGGrid data={rowsData} setRowData={setRowData} rowData={rowData} colDefs={columnDefs} />
+      <AGGrid data={rowsData} setRowData={setRowData} rowData={rowData} colDefs={columnDefs}  />
 
     </div>
   )

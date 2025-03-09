@@ -13,7 +13,6 @@ const Store = () => {
   const [rowData, setRowData] = useState<any[]>([]);
   const handleDelete = createDeleteHandler(setRowData)
 
-
   const colDefs: ColDef[] = [
     {
       field: "actions",
@@ -33,7 +32,7 @@ const Store = () => {
       maxWidth: 100
     },
     { field: "Seq No.", headerName: "S.No", valueGetter: (params) => params.data['Seq No.'], rowDrag: true, maxWidth: 100 },
-    { field: "Label", headerName: "Store", width: 100, cellStyle: { borderRight: "2px solid #ccc" } },
+    { field: "Label", headerName: "Store", width: 100, cellStyle: { borderRight: "2px solid #ccc"  }, editable: true, },
     { field: "City", width: 100, editable: true },
     { field: "State", width: 100 , editable:true},
 
@@ -55,7 +54,7 @@ const Store = () => {
     <div className="h-full">
       {!storeData || storeData.length === 0 ?
         <CsvUploader /> : <>
-          <AGGrid data={storeData} setRowData={setRowData} rowData={rowData} colDefs={colDefs} />
+          <AGGrid  data={storeData} setRowData={setRowData} rowData={rowData} colDefs={colDefs} />
           <button onClick={handleAddRow} className="text-black px-6 py-2 shadow-2xl my-2 " style={{   backgroundColor: "#ffab91"  }}>
              New Store
           </button></>}

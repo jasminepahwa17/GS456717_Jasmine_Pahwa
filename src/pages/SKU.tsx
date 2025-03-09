@@ -3,8 +3,8 @@ import { RootState } from "../store/store"
 import AGGrid from "../components/AGGrid"
 import { useState } from "react"
 import { createDeleteHandler } from "../utils/functions"
-import { ColDef } from "ag-grid-community"
 import bin from "../assets/bin.svg"
+import { ColDef } from "ag-grid-community"
 
 
 const SKU = () => {
@@ -30,14 +30,13 @@ const SKU = () => {
 
   const handleAddRow = () => {
     const newRow = {
-      ID: `ST${Math.floor(Math.random() * 1000)}`,
-      "Seq No.": rowData.length + 1,
+      ID: `SK${Math.floor(Math.random() * 1000)}`,
       Label: "",
-      City: "",
-      State: "",
+      Price: "",
+      Cost: ""
     };
 
-    setRowData((prevData) => [...prevData, newRow]);
+    setRowData((prevData) => [newRow, ...prevData]);
   };
   return (
     <div className="h-full">
