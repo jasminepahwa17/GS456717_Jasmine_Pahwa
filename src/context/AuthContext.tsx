@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   }, []);
 
-  const login = async (email: string, password: string) => {
+  const login = async (email: string) => {
     try {
       const fakeToken = "QHbEI3ga6JTsz5eMyfVIIEsvAzwQ3UKSKI8PttbuzXzsRX6SEeFiGfqTShcxCxMW"; 
       const userData = { email, token: fakeToken };
