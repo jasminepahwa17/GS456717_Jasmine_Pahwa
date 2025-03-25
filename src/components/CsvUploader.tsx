@@ -3,11 +3,12 @@ import { useDispatch } from "react-redux";
 import * as XLSX from "xlsx";
 import { setCSVStoreData } from "../store/slices/storesCSV";
 import { setCSVSKUData } from "../store/slices/skuCSV";
-import {setCSVCalenderData} from "../store/slices/calenderCSV"
-import {setCSVPlanningData} from "../store/slices/planningCSV"
+import { setCSVCalenderData } from "../store/slices/calenderCSV"
+import { setCSVPlanningData } from "../store/slices/planningCSV"
+import DownloadFileButton from "./DownloadFileButton";
 
 const CsvUploader = () => {
-    
+
     const dispatch = useDispatch();
 
     const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,20 +28,24 @@ const CsvUploader = () => {
                 setCSVSKUData,
                 setCSVCalenderData,
                 setCSVPlanningData,
-              ];
-              
-              workbook.SheetNames.forEach((sheetName, index) => {
+            ];
+
+            workbook.SheetNames.forEach((sheetName, index) => {
                 const sheet = workbook.Sheets[sheetName];
                 const jsonData = XLSX.utils.sheet_to_json(sheet);
                 dispatch(sheetActions[index](jsonData));
-              });
+            });
         }
     };
 
     return (
-        <div className="p-4 border rounded">
-            <input type="file" accept=".xlsx, .xls" onChange={handleFileUpload} />
+        <div className="flex flex-col gap-4">
+            <div className="p-4 border rounded">
+                <input type="file" accept=".xlsx, .xls" onChange={handleFileUpload} />
+            </div>
+            <DownloadFileButton />
         </div>
+
     );
 }
 
