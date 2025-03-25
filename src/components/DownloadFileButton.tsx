@@ -2,7 +2,7 @@ import React from 'react'
 
 const DownloadFileButton: React.FC = () => {
     const handleDownload = () => {
-      const fileUrl = "src/assets/Sample-Data.xlsx"; // Update with your actual file path
+      const fileUrl = "/Sample-Data.xlsx"; // Update with your actual file path
       const link = document.createElement("a");
       link.href = fileUrl;
       link.download = "Sample-Data.xlsx"; // Default file name for download
